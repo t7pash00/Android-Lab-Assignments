@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String test = edi.getText().toString();
                 countrieslist.add(test);
+                adapter.notifyDataSetChanged();
                 Collections.reverse(countrieslist);
-
                 edi.setText(null);
             }
 
