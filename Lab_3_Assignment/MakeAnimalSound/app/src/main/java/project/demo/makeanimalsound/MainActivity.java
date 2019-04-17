@@ -9,12 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
-
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        LinearLayout layout = findViewById(R.id.layout_wish);
         TextView text = findViewById(R.id.hello);
         switch (item.getItemId()){
             case R.id.mammals:
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView2)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("bear");
                     }
                 });
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView3)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("elephant");
+
                     }
                 });
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView4)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("lamb");
                     }
                 });
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView5)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("wolf");
                     }
                 });
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView2)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("huuhkaja_norther_eagle_owl");
                     }
                 });
@@ -81,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView3)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("peippo_chaffinch");
                     }
                 });
                 ((ImageView)findViewById(R.id.imageView4)).setImageResource(R.drawable.peukaloinen);
-                ((ImageView)findViewById(R.id.imageView2)).setOnClickListener(new View.OnClickListener() {
+                ((ImageView)findViewById(R.id.imageView4)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopPlaying();
                         playSound("peukaloinen_wren");
                     }
                 });
@@ -95,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imageView5)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        playSound("punatukku_northern_bullfinch");
+                        stopPlaying();
+                        playSound("punatulkku_northern_bullfinch");
                     }
                 });
                 return true;
@@ -106,10 +115,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void playSound(String name) {
-        MediaPlayer mediaPlayer;
+    private void playSound(String name) {
         mediaPlayer = MediaPlayer.create(MainActivity.this, getResources().getIdentifier(name, "raw", getPackageName()));
         mediaPlayer.start();
+    }
+    private void stopPlaying() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
 

@@ -15,10 +15,10 @@ TextView showtime;
 
         showtime = findViewById(R.id.time_count);
 
-        String count_time = getIntent().getStringExtra("count_time");
-        int time = Integer.parseInt(count_time)*1000;
+        int count_time = getIntent().getIntExtra("count_time", 0);
+        count_time = count_time*1000;
 
-        new CountDownTimer(time, 1000){
+        new CountDownTimer(count_time, 1000){
 
             public void onTick(long millisUntilFinished) {
                 showtime.setText("seconds remaining: " + millisUntilFinished / 1000);
